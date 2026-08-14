@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AO3 Bookmark Tags Selector
 // @namespace    https://github.com/Hibernationnn/AO3-Book-Tag-Selector
-// @version      1.0
+// @version      1.0.1
 // @description  AO3 bookmark tag manager with personal tag library, search and quick adding.
 // @author       Hibernationnn
 // @match        https://archiveofourown.org/*
@@ -338,103 +338,103 @@
 
     function findBookmarkersTagsFieldset() {
 
-        const fieldsets = [
-            ...document.querySelectorAll(
-                'fieldset'
-            )
-        ];
+    const fieldsets = [
+        ...document.querySelectorAll(
+            'fieldset'
+        )
+    ];
 
 
-        for (const fieldset of fieldsets) {
+    for (const fieldset of fieldsets) {
 
-            const legend =
-                fieldset.querySelector(
-                    ':scope > legend'
-                );
-
-
-            if (!legend) {
-                continue;
-            }
-
-
-            const title =
-                clean(
-                    legend.textContent
-                );
-
-
-            if (
-                isBookmarkersTagsTitle(
-                    title
-                )
-            ) {
-
-                return fieldset;
-            }
-        }
-
-
-        const headings = [
-            ...document.querySelectorAll(
-                'legend, dt, h2, h3, h4, h5'
-            )
-        ];
-
-
-        const heading =
-            headings.find(
-                el =>
-                    isBookmarkersTagsTitle(
-                        el.textContent
-                    )
+        const legend =
+            fieldset.querySelector(
+                ':scope > legend'
             );
 
 
-        if (!heading) {
-            return null;
+        if (!legend) {
+            continue;
         }
 
 
+        const title =
+            clean(
+                legend.textContent
+            );
+
+
         if (
-            heading.tagName.toLowerCase() ===
-            'legend'
+            isBookmarkersTagsTitle(
+                title
+            )
         ) {
 
-            const parent =
-                heading.parentElement;
-
-
-            if (
-                parent &&
-                parent.querySelector(
-                    'input[type="checkbox"]'
-                )
-            ) {
-
-                return parent;
-            }
+            return fieldset;
         }
+    }
 
 
-        let next =
-            heading.nextElementSibling;
+    const headings = [
+        ...document.querySelectorAll(
+            'legend, dt, h2, h3, h4, h5'
+        )
+    ];
+
+
+    const heading =
+        headings.find(
+            el =>
+                isBookmarkersTagsTitle(
+                    el.textContent
+                )
+        );
+
+
+    if (!heading) {
+        return null;
+    }
+
+
+    if (
+        heading.tagName.toLowerCase() ===
+        'legend'
+    ) {
+
+        const parent =
+            heading.parentElement;
 
 
         if (
-            next &&
-            next.querySelector &&
-            next.querySelector(
+            parent &&
+            parent.querySelector(
                 'input[type="checkbox"]'
             )
         ) {
 
-            return next;
+            return parent;
         }
-
-
-        return null;
     }
+
+
+    let next =
+        heading.nextElementSibling;
+
+
+    if (
+        next &&
+        next.querySelector &&
+        next.querySelector(
+            'input[type="checkbox"]'
+        )
+    ) {
+
+        return next;
+    }
+
+
+    return null;
+}
 
 
     /* =========================================================
