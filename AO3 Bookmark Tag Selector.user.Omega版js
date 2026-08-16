@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         AO3 Bookmark Tag Selector
+// @name         AO3 Bookmark Tags Selector
 // @namespace    https://github.com/Hibernationnn/AO3-Bookmark-Tag-Selector
 // @version      1.0.8
 // @description  为 AO3 书签编辑页面添加个人标签库、标签搜索、快捷添加标签块、自动记录确认标签功能。
